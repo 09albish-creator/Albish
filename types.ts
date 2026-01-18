@@ -22,7 +22,7 @@ export interface Playlist {
 }
 
 export interface ChatMessage {
-  role: 'user' | 'miku';
+  role: 'user' | 'miku' | 'miku-system-offline';
   text: string;
   timestamp: number;
 }

@@ -33,7 +33,7 @@ const MikuChat: React.FC<MikuChatProps> = ({ playerState, isOffline }) => {
     const lastMessage = messages[messages.length - 1];
     if (isOffline && lastMessage?.role !== 'miku-system-offline') {
       setMessages(prev => [...prev, {
-        role: 'miku',
+        role: 'miku-system-offline',
         text: "My connection to the data stream is down... I can't chat right now. (T_T)",
         timestamp: Date.now()
       }]);
@@ -69,7 +69,30 @@ const MikuChat: React.FC<MikuChatProps> = ({ playerState, isOffline }) => {
       </div>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 relative z-10 custom-scrollbar">
-        {/* Message mapping remains the same */}
+        {messages.map((msg, i) => (
+          <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+            <div className={`text-[10px] font-mono mb-1 uppercase tracking-widest ${msg.role === 'user' ? 'text-miku-pink/60' : 'text-miku-cyan/60'}`}>
+              {msg.role === 'user' ? 'User' : 'Hatsune Miku'}
+            </div>
+            <div className={`max-w-[85%] relative p-4 rounded-2xl text-sm leading-relaxed tech-border ${
+              msg.role === 'user' 
+                ? 'bg-miku-pink/10 text-white border border-miku-pink/30 tech-border-br rounded-tr-none' 
+                : 'bg-miku-cyan/10 text-miku-cyan border border-miku-cyan/30 tech-border-tl rounded-tl-none glow-border-cyan'
+            }`}>
+              {msg.text}
+            </div>
+          </div>
+        ))}
+        {isTyping && (
+          <div className="flex flex-col items-start animate-pulse">
+            <div className="text-[10px] font-mono mb-1 text-miku-cyan/40 uppercase tracking-widest italic">Miku is generating...</div>
+            <div className="bg-white/5 border border-miku-cyan/20 rounded-2xl rounded-tl-none p-4 flex gap-2 items-center">
+              <div className="w-1.5 h-1.5 bg-miku-cyan rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+              <div className="w-1.5 h-1.5 bg-miku-cyan rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              <div className="w-1.5 h-1.5 bg-miku-cyan rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="p-6 border-t border-miku-cyan/10 bg-black/40 relative z-10">
