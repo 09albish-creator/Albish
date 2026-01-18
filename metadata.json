@@ -1,0 +1,7 @@
+{
+  "name": "MikuWave - Virtual Diva Player",
+  "description": "A futuristic Hatsune Miku themed music player and AI companion. Experience Miku's world through a cyan-tinted UI, real-time audio visualization, and an AI chat assistant powered by Gemini.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

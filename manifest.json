@@ -1,0 +1,16 @@
+{
+  "short_name": "MikuWave",
+  "name": "MikuWave Player",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#39C5BB",
+  "background_color": "#0a0e14",
+  "description": "A futuristic Hatsune Miku themed music player and AI companion."
+}
